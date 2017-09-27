@@ -1,0 +1,9 @@
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\bin\Debug\Computer Monitor.exe.config
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\bin\Debug\Computer Monitor.exe
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\bin\Debug\Computer Monitor.pdb
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Debug\Computer Monitor.csprojResolveAssemblyReference.cache
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Debug\Computer_Monitor.Form1.resources
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Debug\Computer_Monitor.Properties.Resources.resources
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Debug\Computer Monitor.csproj.GenerateResource.Cache
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Debug\Computer Monitor.exe
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Debug\Computer Monitor.pdb

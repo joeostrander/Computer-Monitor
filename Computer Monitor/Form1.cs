@@ -69,7 +69,7 @@ namespace Computer_Monitor
             ListViewEvents.ListViewItemSorter = lvwColumnSorter;
             ListViewEvents.Sorting = System.Windows.Forms.SortOrder.Ascending;
             ListViewEvents.AutoArrange = true;
-
+             
             lvwColumnSorter._SortModifier = ListViewColumnSorter.SortModifiers.SortByText;
         }
 

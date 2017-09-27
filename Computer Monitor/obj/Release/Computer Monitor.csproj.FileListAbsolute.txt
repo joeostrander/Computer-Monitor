@@ -1,0 +1,8 @@
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\bin\Release\Computer Monitor.exe.config
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\bin\Release\Computer Monitor.exe
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\bin\Release\Computer Monitor.pdb
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Release\Computer_Monitor.Form1.resources
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Release\Computer_Monitor.Properties.Resources.resources
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Release\Computer Monitor.csproj.GenerateResource.Cache
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Release\Computer Monitor.exe
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Release\Computer Monitor.pdb
