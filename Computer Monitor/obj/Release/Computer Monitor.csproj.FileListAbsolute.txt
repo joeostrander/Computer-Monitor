@@ -6,3 +6,4 @@ C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\
 C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Release\Computer Monitor.csproj.GenerateResource.Cache
 C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Release\Computer Monitor.exe
 C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Release\Computer Monitor.pdb
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Release\Computer_Monitor.FormEventView.resources

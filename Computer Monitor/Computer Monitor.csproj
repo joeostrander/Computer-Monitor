@@ -57,10 +57,19 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="ColumnSorter.cs" />
+    <Compile Include="FormEventView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEventView.Designer.cs">
+      <DependentUpon>FormEventView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEventView.resx">
+      <DependentUpon>FormEventView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

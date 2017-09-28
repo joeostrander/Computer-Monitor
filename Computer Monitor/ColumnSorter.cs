@@ -324,5 +324,6 @@ namespace ListViewSorter
             return wholePattern.IsMatch(strNumber);
         }
     }
+    
 
 }

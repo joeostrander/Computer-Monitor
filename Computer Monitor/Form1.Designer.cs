@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.checkBoxProcesses = new System.Windows.Forms.CheckBox();
             this.checkBoxEvents = new System.Windows.Forms.CheckBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -52,14 +53,20 @@
             this.panelEventOptions = new System.Windows.Forms.Panel();
             this.groupBoxOptions = new System.Windows.Forms.GroupBox();
             this.groupBoxComputer = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.ListView1 = new System.Windows.Forms.ListView();
+            this.checkBoxExistingProcesses = new System.Windows.Forms.CheckBox();
+            this.ListViewProcesses = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeaderPID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeaderUserName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeaderCommandLine = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeaderExecutablePath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColumnHeaderTerminationDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.labelStatus = new System.Windows.Forms.Label();
+            this.contextMenuStripEvents = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripProcesses = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.terminateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -70,6 +77,8 @@
             this.panelEventOptions.SuspendLayout();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxComputer.SuspendLayout();
+            this.contextMenuStripEvents.SuspendLayout();
+            this.contextMenuStripProcesses.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBoxProcesses
@@ -80,7 +89,7 @@
             this.checkBoxProcesses.Location = new System.Drawing.Point(7, 19);
             this.checkBoxProcesses.Name = "checkBoxProcesses";
             this.checkBoxProcesses.Size = new System.Drawing.Size(113, 17);
-            this.checkBoxProcesses.TabIndex = 1;
+            this.checkBoxProcesses.TabIndex = 0;
             this.checkBoxProcesses.Text = "Monitor &Processes";
             this.checkBoxProcesses.UseVisualStyleBackColor = true;
             this.checkBoxProcesses.CheckedChanged += new System.EventHandler(this.checkBoxProcesses_CheckedChanged);
@@ -117,7 +126,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.groupBoxEvents);
             this.splitContainer1.Size = new System.Drawing.Size(838, 411);
             this.splitContainer1.SplitterDistance = 202;
-            this.splitContainer1.TabIndex = 3;
+            this.splitContainer1.TabIndex = 2;
             this.splitContainer1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Paint);
             // 
             // groupBoxProcesses
@@ -125,7 +134,7 @@
             this.groupBoxProcesses.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxProcesses.Controls.Add(this.ListView1);
+            this.groupBoxProcesses.Controls.Add(this.ListViewProcesses);
             this.groupBoxProcesses.Location = new System.Drawing.Point(3, 3);
             this.groupBoxProcesses.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.groupBoxProcesses.Name = "groupBoxProcesses";
@@ -157,6 +166,7 @@
             this.ColumnHeaderType,
             this.ColumnHeaderSource,
             this.ColumnHeaderMessage});
+            this.ListViewEvents.ContextMenuStrip = this.contextMenuStripEvents;
             this.ListViewEvents.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ListViewEvents.FullRowSelect = true;
             this.ListViewEvents.GridLines = true;
@@ -164,10 +174,11 @@
             this.ListViewEvents.MultiSelect = false;
             this.ListViewEvents.Name = "ListViewEvents";
             this.ListViewEvents.Size = new System.Drawing.Size(826, 180);
-            this.ListViewEvents.TabIndex = 9;
+            this.ListViewEvents.TabIndex = 0;
             this.ListViewEvents.UseCompatibleStateImageBehavior = false;
             this.ListViewEvents.View = System.Windows.Forms.View.Details;
             this.ListViewEvents.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.ListView1_ColumnClick);
+            this.ListViewEvents.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListViewEvents_MouseDoubleClick);
             // 
             // ColumnHeaderCreationDate
             // 
@@ -213,7 +224,7 @@
             this.checkBoxMonitorProcessAdditions.Location = new System.Drawing.Point(3, 8);
             this.checkBoxMonitorProcessAdditions.Name = "checkBoxMonitorProcessAdditions";
             this.checkBoxMonitorProcessAdditions.Size = new System.Drawing.Size(99, 17);
-            this.checkBoxMonitorProcessAdditions.TabIndex = 1;
+            this.checkBoxMonitorProcessAdditions.TabIndex = 0;
             this.checkBoxMonitorProcessAdditions.Text = "Show Additions";
             this.checkBoxMonitorProcessAdditions.UseVisualStyleBackColor = true;
             // 
@@ -225,7 +236,7 @@
             this.checkBoxMonitorProcessDeletions.Location = new System.Drawing.Point(3, 31);
             this.checkBoxMonitorProcessDeletions.Name = "checkBoxMonitorProcessDeletions";
             this.checkBoxMonitorProcessDeletions.Size = new System.Drawing.Size(100, 17);
-            this.checkBoxMonitorProcessDeletions.TabIndex = 4;
+            this.checkBoxMonitorProcessDeletions.TabIndex = 1;
             this.checkBoxMonitorProcessDeletions.Text = "Show Deletions";
             this.checkBoxMonitorProcessDeletions.UseVisualStyleBackColor = true;
             // 
@@ -235,7 +246,7 @@
             this.Label3.Location = new System.Drawing.Point(206, 9);
             this.Label3.Name = "Label3";
             this.Label3.Size = new System.Drawing.Size(60, 13);
-            this.Label3.TabIndex = 11;
+            this.Label3.TabIndex = 2;
             this.Label3.Text = "Log &Types:";
             // 
             // Label2
@@ -244,7 +255,7 @@
             this.Label2.Location = new System.Drawing.Point(3, 9);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(52, 13);
-            this.Label2.TabIndex = 9;
+            this.Label2.TabIndex = 0;
             this.Label2.Text = "Log &Files:";
             // 
             // ListBoxLogTypes
@@ -254,7 +265,7 @@
             this.ListBoxLogTypes.Name = "ListBoxLogTypes";
             this.ListBoxLogTypes.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.ListBoxLogTypes.Size = new System.Drawing.Size(120, 69);
-            this.ListBoxLogTypes.TabIndex = 12;
+            this.ListBoxLogTypes.TabIndex = 3;
             // 
             // ListBoxLogFiles
             // 
@@ -263,14 +274,15 @@
             this.ListBoxLogFiles.Name = "ListBoxLogFiles";
             this.ListBoxLogFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.ListBoxLogFiles.Size = new System.Drawing.Size(120, 69);
-            this.ListBoxLogFiles.TabIndex = 10;
+            this.ListBoxLogFiles.TabIndex = 1;
             // 
             // ButtonStart
             // 
+            this.ButtonStart.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.ButtonStart.Location = new System.Drawing.Point(199, 17);
             this.ButtonStart.Name = "ButtonStart";
             this.ButtonStart.Size = new System.Drawing.Size(104, 23);
-            this.ButtonStart.TabIndex = 13;
+            this.ButtonStart.TabIndex = 1;
             this.ButtonStart.Text = "&Start";
             this.ButtonStart.UseVisualStyleBackColor = true;
             this.ButtonStart.Click += new System.EventHandler(this.ButtonStart_Click);
@@ -280,17 +292,17 @@
             this.TextBoxComputer.Location = new System.Drawing.Point(6, 19);
             this.TextBoxComputer.Name = "TextBoxComputer";
             this.TextBoxComputer.Size = new System.Drawing.Size(187, 20);
-            this.TextBoxComputer.TabIndex = 8;
+            this.TextBoxComputer.TabIndex = 0;
             // 
             // panelProcessOptions
             // 
-            this.panelProcessOptions.Controls.Add(this.checkBox1);
+            this.panelProcessOptions.Controls.Add(this.checkBoxExistingProcesses);
             this.panelProcessOptions.Controls.Add(this.checkBoxMonitorProcessAdditions);
             this.panelProcessOptions.Controls.Add(this.checkBoxMonitorProcessDeletions);
             this.panelProcessOptions.Location = new System.Drawing.Point(126, 11);
             this.panelProcessOptions.Name = "panelProcessOptions";
             this.panelProcessOptions.Size = new System.Drawing.Size(152, 78);
-            this.panelProcessOptions.TabIndex = 14;
+            this.panelProcessOptions.TabIndex = 1;
             // 
             // panelEventOptions
             // 
@@ -301,7 +313,7 @@
             this.panelEventOptions.Location = new System.Drawing.Point(415, 11);
             this.panelEventOptions.Name = "panelEventOptions";
             this.panelEventOptions.Size = new System.Drawing.Size(399, 84);
-            this.panelEventOptions.TabIndex = 15;
+            this.panelEventOptions.TabIndex = 3;
             // 
             // groupBoxOptions
             // 
@@ -314,7 +326,7 @@
             this.groupBoxOptions.Location = new System.Drawing.Point(12, 12);
             this.groupBoxOptions.Name = "groupBoxOptions";
             this.groupBoxOptions.Size = new System.Drawing.Size(832, 97);
-            this.groupBoxOptions.TabIndex = 16;
+            this.groupBoxOptions.TabIndex = 0;
             this.groupBoxOptions.TabStop = false;
             this.groupBoxOptions.Text = "&Options";
             // 
@@ -322,47 +334,47 @@
             // 
             this.groupBoxComputer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxComputer.Controls.Add(this.labelStatus);
             this.groupBoxComputer.Controls.Add(this.TextBoxComputer);
             this.groupBoxComputer.Controls.Add(this.ButtonStart);
             this.groupBoxComputer.Location = new System.Drawing.Point(12, 115);
             this.groupBoxComputer.Name = "groupBoxComputer";
             this.groupBoxComputer.Size = new System.Drawing.Size(832, 51);
-            this.groupBoxComputer.TabIndex = 17;
+            this.groupBoxComputer.TabIndex = 1;
             this.groupBoxComputer.TabStop = false;
             this.groupBoxComputer.Text = "&Computer";
             // 
-            // checkBox1
+            // checkBoxExistingProcesses
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(3, 54);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(114, 17);
-            this.checkBox1.TabIndex = 5;
-            this.checkBox1.Text = "Existing Processes";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBoxExistingProcesses.AutoSize = true;
+            this.checkBoxExistingProcesses.Location = new System.Drawing.Point(3, 54);
+            this.checkBoxExistingProcesses.Name = "checkBoxExistingProcesses";
+            this.checkBoxExistingProcesses.Size = new System.Drawing.Size(114, 17);
+            this.checkBoxExistingProcesses.TabIndex = 2;
+            this.checkBoxExistingProcesses.Text = "Existing Processes";
+            this.checkBoxExistingProcesses.UseVisualStyleBackColor = true;
             // 
-            // ListView1
+            // ListViewProcesses
             // 
-            this.ListView1.AllowColumnReorder = true;
-            this.ListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ListViewProcesses.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
+            this.ColumnHeaderTerminationDate,
             this.ColumnHeaderName,
             this.ColumnHeaderPID,
             this.ColumnHeaderUserName,
             this.ColumnHeaderCommandLine,
             this.ColumnHeaderExecutablePath});
-            this.ListView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ListView1.FullRowSelect = true;
-            this.ListView1.GridLines = true;
-            this.ListView1.Location = new System.Drawing.Point(0, 16);
-            this.ListView1.MultiSelect = false;
-            this.ListView1.Name = "ListView1";
-            this.ListView1.Size = new System.Drawing.Size(832, 177);
-            this.ListView1.TabIndex = 3;
-            this.ListView1.UseCompatibleStateImageBehavior = false;
-            this.ListView1.View = System.Windows.Forms.View.Details;
+            this.ListViewProcesses.ContextMenuStrip = this.contextMenuStripProcesses;
+            this.ListViewProcesses.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ListViewProcesses.FullRowSelect = true;
+            this.ListViewProcesses.GridLines = true;
+            this.ListViewProcesses.Location = new System.Drawing.Point(0, 16);
+            this.ListViewProcesses.MultiSelect = false;
+            this.ListViewProcesses.Name = "ListViewProcesses";
+            this.ListViewProcesses.Size = new System.Drawing.Size(832, 177);
+            this.ListViewProcesses.TabIndex = 0;
+            this.ListViewProcesses.UseCompatibleStateImageBehavior = false;
+            this.ListViewProcesses.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
@@ -400,17 +412,68 @@
             this.ColumnHeaderExecutablePath.Text = "Executable Path";
             this.ColumnHeaderExecutablePath.Width = 239;
             // 
+            // ColumnHeaderTerminationDate
+            // 
+            this.ColumnHeaderTerminationDate.Tag = "Date";
+            this.ColumnHeaderTerminationDate.Text = "Terminated";
+            this.ColumnHeaderTerminationDate.Width = 145;
+            // 
+            // labelStatus
+            // 
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(331, 22);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(68, 13);
+            this.labelStatus.TabIndex = 2;
+            this.labelStatus.Text = "labelStatus...";
+            // 
+            // contextMenuStripEvents
+            // 
+            this.contextMenuStripEvents.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewMessageToolStripMenuItem});
+            this.contextMenuStripEvents.Name = "contextMenuStripEvents";
+            this.contextMenuStripEvents.ShowImageMargin = false;
+            this.contextMenuStripEvents.Size = new System.Drawing.Size(124, 26);
+            this.contextMenuStripEvents.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripEvents_Opening);
+            // 
+            // viewMessageToolStripMenuItem
+            // 
+            this.viewMessageToolStripMenuItem.Name = "viewMessageToolStripMenuItem";
+            this.viewMessageToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.viewMessageToolStripMenuItem.Text = "&View Message";
+            this.viewMessageToolStripMenuItem.Click += new System.EventHandler(this.viewMessageToolStripMenuItem_Click);
+            // 
+            // contextMenuStripProcesses
+            // 
+            this.contextMenuStripProcesses.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.terminateToolStripMenuItem});
+            this.contextMenuStripProcesses.Name = "contextMenuStripProcesses";
+            this.contextMenuStripProcesses.ShowImageMargin = false;
+            this.contextMenuStripProcesses.Size = new System.Drawing.Size(128, 48);
+            this.contextMenuStripProcesses.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripProcesses_Opening);
+            // 
+            // terminateToolStripMenuItem
+            // 
+            this.terminateToolStripMenuItem.Name = "terminateToolStripMenuItem";
+            this.terminateToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.terminateToolStripMenuItem.Text = "&Terminate";
+            this.terminateToolStripMenuItem.Click += new System.EventHandler(this.terminateToolStripMenuItem_Click);
+            // 
             // Form1
             // 
+            this.AcceptButton = this.ButtonStart;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.ButtonStart;
             this.ClientSize = new System.Drawing.Size(856, 595);
             this.Controls.Add(this.groupBoxComputer);
             this.Controls.Add(this.groupBoxOptions);
             this.Controls.Add(this.splitContainer1);
             this.MinimumSize = new System.Drawing.Size(872, 575);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -426,6 +489,8 @@
             this.groupBoxOptions.PerformLayout();
             this.groupBoxComputer.ResumeLayout(false);
             this.groupBoxComputer.PerformLayout();
+            this.contextMenuStripEvents.ResumeLayout(false);
+            this.contextMenuStripProcesses.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -455,14 +520,20 @@
         private System.Windows.Forms.Panel panelEventOptions;
         private System.Windows.Forms.GroupBox groupBoxOptions;
         private System.Windows.Forms.GroupBox groupBoxComputer;
-        private System.Windows.Forms.CheckBox checkBox1;
-        internal System.Windows.Forms.ListView ListView1;
+        private System.Windows.Forms.CheckBox checkBoxExistingProcesses;
+        internal System.Windows.Forms.ListView ListViewProcesses;
         internal System.Windows.Forms.ColumnHeader columnHeader1;
         internal System.Windows.Forms.ColumnHeader ColumnHeaderName;
         internal System.Windows.Forms.ColumnHeader ColumnHeaderPID;
         internal System.Windows.Forms.ColumnHeader ColumnHeaderUserName;
         internal System.Windows.Forms.ColumnHeader ColumnHeaderCommandLine;
         internal System.Windows.Forms.ColumnHeader ColumnHeaderExecutablePath;
+        internal System.Windows.Forms.ColumnHeader ColumnHeaderTerminationDate;
+        private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripEvents;
+        private System.Windows.Forms.ToolStripMenuItem viewMessageToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripProcesses;
+        private System.Windows.Forms.ToolStripMenuItem terminateToolStripMenuItem;
     }
 }
 
