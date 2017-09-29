@@ -33,6 +33,16 @@
             this.checkBoxEvents = new System.Windows.Forms.CheckBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBoxProcesses = new System.Windows.Forms.GroupBox();
+            this.ListViewProcesses = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColumnHeaderTerminationDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColumnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColumnHeaderPID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColumnHeaderUserName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColumnHeaderCommandLine = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColumnHeaderExecutablePath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStripProcesses = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.terminateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxEvents = new System.Windows.Forms.GroupBox();
             this.ListViewEvents = new System.Windows.Forms.ListView();
             this.ColumnHeaderCreationDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -41,6 +51,8 @@
             this.ColumnHeaderType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeaderSource = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnHeaderMessage = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStripEvents = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBoxMonitorProcessAdditions = new System.Windows.Forms.CheckBox();
             this.checkBoxMonitorProcessDeletions = new System.Windows.Forms.CheckBox();
             this.Label3 = new System.Windows.Forms.Label();
@@ -50,35 +62,26 @@
             this.ButtonStart = new System.Windows.Forms.Button();
             this.TextBoxComputer = new System.Windows.Forms.TextBox();
             this.panelProcessOptions = new System.Windows.Forms.Panel();
+            this.checkBoxExistingProcesses = new System.Windows.Forms.CheckBox();
             this.panelEventOptions = new System.Windows.Forms.Panel();
             this.groupBoxOptions = new System.Windows.Forms.GroupBox();
             this.groupBoxComputer = new System.Windows.Forms.GroupBox();
-            this.checkBoxExistingProcesses = new System.Windows.Forms.CheckBox();
-            this.ListViewProcesses = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ColumnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ColumnHeaderPID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ColumnHeaderUserName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ColumnHeaderCommandLine = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ColumnHeaderExecutablePath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ColumnHeaderTerminationDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.labelStatus = new System.Windows.Forms.Label();
-            this.contextMenuStripEvents = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.viewMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStripProcesses = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.terminateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripForm1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBoxProcesses.SuspendLayout();
+            this.contextMenuStripProcesses.SuspendLayout();
             this.groupBoxEvents.SuspendLayout();
+            this.contextMenuStripEvents.SuspendLayout();
             this.panelProcessOptions.SuspendLayout();
             this.panelEventOptions.SuspendLayout();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxComputer.SuspendLayout();
-            this.contextMenuStripEvents.SuspendLayout();
-            this.contextMenuStripProcesses.SuspendLayout();
+            this.contextMenuStripForm1.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBoxProcesses
@@ -143,6 +146,86 @@
             this.groupBoxProcesses.TabIndex = 0;
             this.groupBoxProcesses.TabStop = false;
             this.groupBoxProcesses.Text = "Process History";
+            // 
+            // ListViewProcesses
+            // 
+            this.ListViewProcesses.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.ColumnHeaderTerminationDate,
+            this.ColumnHeaderName,
+            this.ColumnHeaderPID,
+            this.ColumnHeaderUserName,
+            this.ColumnHeaderCommandLine,
+            this.ColumnHeaderExecutablePath});
+            this.ListViewProcesses.ContextMenuStrip = this.contextMenuStripProcesses;
+            this.ListViewProcesses.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ListViewProcesses.FullRowSelect = true;
+            this.ListViewProcesses.GridLines = true;
+            this.ListViewProcesses.Location = new System.Drawing.Point(0, 16);
+            this.ListViewProcesses.MultiSelect = false;
+            this.ListViewProcesses.Name = "ListViewProcesses";
+            this.ListViewProcesses.Size = new System.Drawing.Size(832, 177);
+            this.ListViewProcesses.TabIndex = 0;
+            this.ListViewProcesses.UseCompatibleStateImageBehavior = false;
+            this.ListViewProcesses.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Tag = "Date";
+            this.columnHeader1.Text = "Created";
+            this.columnHeader1.Width = 145;
+            // 
+            // ColumnHeaderTerminationDate
+            // 
+            this.ColumnHeaderTerminationDate.Tag = "Date";
+            this.ColumnHeaderTerminationDate.Text = "Terminated";
+            this.ColumnHeaderTerminationDate.Width = 145;
+            // 
+            // ColumnHeaderName
+            // 
+            this.ColumnHeaderName.Tag = "String";
+            this.ColumnHeaderName.Text = "Name";
+            this.ColumnHeaderName.Width = 117;
+            // 
+            // ColumnHeaderPID
+            // 
+            this.ColumnHeaderPID.Tag = "Numeric";
+            this.ColumnHeaderPID.Text = "PID";
+            this.ColumnHeaderPID.Width = 76;
+            // 
+            // ColumnHeaderUserName
+            // 
+            this.ColumnHeaderUserName.Tag = "String";
+            this.ColumnHeaderUserName.Text = "User Name";
+            this.ColumnHeaderUserName.Width = 114;
+            // 
+            // ColumnHeaderCommandLine
+            // 
+            this.ColumnHeaderCommandLine.Tag = "String";
+            this.ColumnHeaderCommandLine.Text = "Command Line";
+            this.ColumnHeaderCommandLine.Width = 276;
+            // 
+            // ColumnHeaderExecutablePath
+            // 
+            this.ColumnHeaderExecutablePath.Tag = "String";
+            this.ColumnHeaderExecutablePath.Text = "Executable Path";
+            this.ColumnHeaderExecutablePath.Width = 239;
+            // 
+            // contextMenuStripProcesses
+            // 
+            this.contextMenuStripProcesses.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.terminateToolStripMenuItem});
+            this.contextMenuStripProcesses.Name = "contextMenuStripProcesses";
+            this.contextMenuStripProcesses.ShowImageMargin = false;
+            this.contextMenuStripProcesses.Size = new System.Drawing.Size(103, 26);
+            this.contextMenuStripProcesses.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripProcesses_Opening);
+            // 
+            // terminateToolStripMenuItem
+            // 
+            this.terminateToolStripMenuItem.Name = "terminateToolStripMenuItem";
+            this.terminateToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.terminateToolStripMenuItem.Text = "&Terminate";
+            this.terminateToolStripMenuItem.Click += new System.EventHandler(this.terminateToolStripMenuItem_Click);
             // 
             // groupBoxEvents
             // 
@@ -215,6 +298,22 @@
             this.ColumnHeaderMessage.Tag = "String";
             this.ColumnHeaderMessage.Text = "Message";
             this.ColumnHeaderMessage.Width = 350;
+            // 
+            // contextMenuStripEvents
+            // 
+            this.contextMenuStripEvents.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewMessageToolStripMenuItem});
+            this.contextMenuStripEvents.Name = "contextMenuStripEvents";
+            this.contextMenuStripEvents.ShowImageMargin = false;
+            this.contextMenuStripEvents.Size = new System.Drawing.Size(124, 26);
+            this.contextMenuStripEvents.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripEvents_Opening);
+            // 
+            // viewMessageToolStripMenuItem
+            // 
+            this.viewMessageToolStripMenuItem.Name = "viewMessageToolStripMenuItem";
+            this.viewMessageToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.viewMessageToolStripMenuItem.Text = "&View Message";
+            this.viewMessageToolStripMenuItem.Click += new System.EventHandler(this.viewMessageToolStripMenuItem_Click);
             // 
             // checkBoxMonitorProcessAdditions
             // 
@@ -304,6 +403,16 @@
             this.panelProcessOptions.Size = new System.Drawing.Size(152, 78);
             this.panelProcessOptions.TabIndex = 1;
             // 
+            // checkBoxExistingProcesses
+            // 
+            this.checkBoxExistingProcesses.AutoSize = true;
+            this.checkBoxExistingProcesses.Location = new System.Drawing.Point(3, 54);
+            this.checkBoxExistingProcesses.Name = "checkBoxExistingProcesses";
+            this.checkBoxExistingProcesses.Size = new System.Drawing.Size(114, 17);
+            this.checkBoxExistingProcesses.TabIndex = 2;
+            this.checkBoxExistingProcesses.Text = "Existing Processes";
+            this.checkBoxExistingProcesses.UseVisualStyleBackColor = true;
+            // 
             // panelEventOptions
             // 
             this.panelEventOptions.Controls.Add(this.ListBoxLogFiles);
@@ -319,6 +428,7 @@
             // 
             this.groupBoxOptions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxOptions.ContextMenuStrip = this.contextMenuStripForm1;
             this.groupBoxOptions.Controls.Add(this.checkBoxProcesses);
             this.groupBoxOptions.Controls.Add(this.checkBoxEvents);
             this.groupBoxOptions.Controls.Add(this.panelProcessOptions);
@@ -334,6 +444,7 @@
             // 
             this.groupBoxComputer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxComputer.ContextMenuStrip = this.contextMenuStripForm1;
             this.groupBoxComputer.Controls.Add(this.labelStatus);
             this.groupBoxComputer.Controls.Add(this.TextBoxComputer);
             this.groupBoxComputer.Controls.Add(this.ButtonStart);
@@ -344,80 +455,6 @@
             this.groupBoxComputer.TabStop = false;
             this.groupBoxComputer.Text = "&Computer";
             // 
-            // checkBoxExistingProcesses
-            // 
-            this.checkBoxExistingProcesses.AutoSize = true;
-            this.checkBoxExistingProcesses.Location = new System.Drawing.Point(3, 54);
-            this.checkBoxExistingProcesses.Name = "checkBoxExistingProcesses";
-            this.checkBoxExistingProcesses.Size = new System.Drawing.Size(114, 17);
-            this.checkBoxExistingProcesses.TabIndex = 2;
-            this.checkBoxExistingProcesses.Text = "Existing Processes";
-            this.checkBoxExistingProcesses.UseVisualStyleBackColor = true;
-            // 
-            // ListViewProcesses
-            // 
-            this.ListViewProcesses.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.ColumnHeaderTerminationDate,
-            this.ColumnHeaderName,
-            this.ColumnHeaderPID,
-            this.ColumnHeaderUserName,
-            this.ColumnHeaderCommandLine,
-            this.ColumnHeaderExecutablePath});
-            this.ListViewProcesses.ContextMenuStrip = this.contextMenuStripProcesses;
-            this.ListViewProcesses.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ListViewProcesses.FullRowSelect = true;
-            this.ListViewProcesses.GridLines = true;
-            this.ListViewProcesses.Location = new System.Drawing.Point(0, 16);
-            this.ListViewProcesses.MultiSelect = false;
-            this.ListViewProcesses.Name = "ListViewProcesses";
-            this.ListViewProcesses.Size = new System.Drawing.Size(832, 177);
-            this.ListViewProcesses.TabIndex = 0;
-            this.ListViewProcesses.UseCompatibleStateImageBehavior = false;
-            this.ListViewProcesses.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Tag = "Date";
-            this.columnHeader1.Text = "Created";
-            this.columnHeader1.Width = 145;
-            // 
-            // ColumnHeaderName
-            // 
-            this.ColumnHeaderName.Tag = "String";
-            this.ColumnHeaderName.Text = "Name";
-            this.ColumnHeaderName.Width = 117;
-            // 
-            // ColumnHeaderPID
-            // 
-            this.ColumnHeaderPID.Tag = "Numeric";
-            this.ColumnHeaderPID.Text = "PID";
-            this.ColumnHeaderPID.Width = 76;
-            // 
-            // ColumnHeaderUserName
-            // 
-            this.ColumnHeaderUserName.Tag = "String";
-            this.ColumnHeaderUserName.Text = "User Name";
-            this.ColumnHeaderUserName.Width = 114;
-            // 
-            // ColumnHeaderCommandLine
-            // 
-            this.ColumnHeaderCommandLine.Tag = "String";
-            this.ColumnHeaderCommandLine.Text = "Command Line";
-            this.ColumnHeaderCommandLine.Width = 276;
-            // 
-            // ColumnHeaderExecutablePath
-            // 
-            this.ColumnHeaderExecutablePath.Tag = "String";
-            this.ColumnHeaderExecutablePath.Text = "Executable Path";
-            this.ColumnHeaderExecutablePath.Width = 239;
-            // 
-            // ColumnHeaderTerminationDate
-            // 
-            this.ColumnHeaderTerminationDate.Tag = "Date";
-            this.ColumnHeaderTerminationDate.Text = "Terminated";
-            this.ColumnHeaderTerminationDate.Width = 145;
-            // 
             // labelStatus
             // 
             this.labelStatus.AutoSize = true;
@@ -427,37 +464,20 @@
             this.labelStatus.TabIndex = 2;
             this.labelStatus.Text = "labelStatus...";
             // 
-            // contextMenuStripEvents
+            // contextMenuStripForm1
             // 
-            this.contextMenuStripEvents.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewMessageToolStripMenuItem});
-            this.contextMenuStripEvents.Name = "contextMenuStripEvents";
-            this.contextMenuStripEvents.ShowImageMargin = false;
-            this.contextMenuStripEvents.Size = new System.Drawing.Size(124, 26);
-            this.contextMenuStripEvents.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripEvents_Opening);
+            this.contextMenuStripForm1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.contextMenuStripForm1.Name = "contextMenuStripForm1";
+            this.contextMenuStripForm1.ShowImageMargin = false;
+            this.contextMenuStripForm1.Size = new System.Drawing.Size(83, 26);
             // 
-            // viewMessageToolStripMenuItem
+            // aboutToolStripMenuItem
             // 
-            this.viewMessageToolStripMenuItem.Name = "viewMessageToolStripMenuItem";
-            this.viewMessageToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.viewMessageToolStripMenuItem.Text = "&View Message";
-            this.viewMessageToolStripMenuItem.Click += new System.EventHandler(this.viewMessageToolStripMenuItem_Click);
-            // 
-            // contextMenuStripProcesses
-            // 
-            this.contextMenuStripProcesses.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.terminateToolStripMenuItem});
-            this.contextMenuStripProcesses.Name = "contextMenuStripProcesses";
-            this.contextMenuStripProcesses.ShowImageMargin = false;
-            this.contextMenuStripProcesses.Size = new System.Drawing.Size(128, 48);
-            this.contextMenuStripProcesses.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripProcesses_Opening);
-            // 
-            // terminateToolStripMenuItem
-            // 
-            this.terminateToolStripMenuItem.Name = "terminateToolStripMenuItem";
-            this.terminateToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
-            this.terminateToolStripMenuItem.Text = "&Terminate";
-            this.terminateToolStripMenuItem.Click += new System.EventHandler(this.terminateToolStripMenuItem_Click);
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(82, 22);
+            this.aboutToolStripMenuItem.Text = "&About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -466,6 +486,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.ButtonStart;
             this.ClientSize = new System.Drawing.Size(856, 595);
+            this.ContextMenuStrip = this.contextMenuStripEvents;
             this.Controls.Add(this.groupBoxComputer);
             this.Controls.Add(this.groupBoxOptions);
             this.Controls.Add(this.splitContainer1);
@@ -475,12 +496,15 @@
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Shown += new System.EventHandler(this.Form1_Shown);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBoxProcesses.ResumeLayout(false);
+            this.contextMenuStripProcesses.ResumeLayout(false);
             this.groupBoxEvents.ResumeLayout(false);
+            this.contextMenuStripEvents.ResumeLayout(false);
             this.panelProcessOptions.ResumeLayout(false);
             this.panelProcessOptions.PerformLayout();
             this.panelEventOptions.ResumeLayout(false);
@@ -489,8 +513,7 @@
             this.groupBoxOptions.PerformLayout();
             this.groupBoxComputer.ResumeLayout(false);
             this.groupBoxComputer.PerformLayout();
-            this.contextMenuStripEvents.ResumeLayout(false);
-            this.contextMenuStripProcesses.ResumeLayout(false);
+            this.contextMenuStripForm1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -534,6 +557,8 @@
         private System.Windows.Forms.ToolStripMenuItem viewMessageToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripProcesses;
         private System.Windows.Forms.ToolStripMenuItem terminateToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripForm1;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

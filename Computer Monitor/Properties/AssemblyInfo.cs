@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Computer Monitor")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Monitor process creation/deletion and new Events on a remote or local computer.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Joe Ostrander")]
 [assembly: AssemblyProduct("Computer Monitor")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]

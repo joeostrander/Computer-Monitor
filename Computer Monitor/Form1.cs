@@ -19,7 +19,6 @@ namespace Computer_Monitor
         /*
          * TO DO:
          * background worker to get existing processes
-         * right-click kill process?
          * 
          * 
          */
@@ -38,6 +37,7 @@ namespace Computer_Monitor
         private bool boolWatchingProcesses = false;
         private int intProcessCount = 0;
         private bool boolClosing = false;
+        private bool boolFailure = false;
 
         public struct MyProcess
         {
@@ -100,6 +100,8 @@ namespace Computer_Monitor
             ListViewEvents.AutoArrange = true;
              
             lvwColumnSorter._SortModifier = ListViewColumnSorter.SortModifiers.SortByText;
+
+            
         }
 
         private void splitContainer1_Paint(object sender, PaintEventArgs e)
@@ -114,6 +116,7 @@ namespace Computer_Monitor
             {
                 ListViewEvents.Items.Clear();
                 ListViewProcesses.Items.Clear();
+                boolFailure = false;
 
                 if (checkBoxProcesses.Checked && checkBoxExistingProcesses.Checked)
                 {
@@ -164,10 +167,17 @@ namespace Computer_Monitor
                     boolWatchingEvents = StartWatchingEvents();
                 }
 
+                if (boolFailure)
+                    return;
+
                 if (checkBoxProcesses.Checked)
                 {
                     boolWatchingProcesses = StartWatchingProcesses();
                 }
+
+
+                if (boolFailure)
+                    return;
 
                 if (boolWatchingEvents||boolWatchingProcesses)
                 {
@@ -380,11 +390,13 @@ namespace Computer_Monitor
                 {
                     MessageBox.Show("Access is denied.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     boolSuccess = false;
+                    boolFailure = true;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     boolSuccess = false;
+                    boolFailure = true;
                 }
             }
 
@@ -407,11 +419,13 @@ namespace Computer_Monitor
                 {
                     MessageBox.Show("Access is denied.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     boolSuccess = false;
+                    boolFailure = true;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     boolSuccess = false;
+                    boolFailure = true;
                 }
             }
 
@@ -805,10 +819,12 @@ namespace Computer_Monitor
             catch (UnauthorizedAccessException uex)
             {
                 MessageBox.Show("Access is denied.",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                boolFailure = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                boolFailure = true;
             }
 
             return false;
@@ -1007,10 +1023,11 @@ namespace Computer_Monitor
 
             foreach (ColumnHeader col in ListViewEvents.Columns)
             {
-                string text = ListViewEvents.Items[intSelectedIndex].SubItems[col.Index].Text;
-                rtf += "\\cf1\\b " + col.Text + ":\\b0\\cf0\\par\r\n";
-                rtf += text + "\\par\\par\r\n";
-
+                string eventHeading = col.Text;
+                string eventText = ListViewEvents.Items[intSelectedIndex].SubItems[col.Index].Text.Replace("\n", "\\par ");
+                rtf += "\\cf1\\b " + eventHeading + ":\\b0\\cf0\\par \r\n";
+                rtf += eventText + "\\par \\par \r\n";
+                Console.WriteLine(rtf);
             }
 
             FormEventView frmEvt = new FormEventView();
@@ -1112,6 +1129,19 @@ namespace Computer_Monitor
                 }
             }
         }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            TextBoxComputer.Focus();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 about = new AboutBox1();
+            about.ShowDialog();
+        }
+
+
     }
 
 
