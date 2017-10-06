@@ -9,3 +9,4 @@ C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\
 C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Release\Computer_Monitor.FormEventView.resources
 C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Release\Computer Monitor.csprojResolveAssemblyReference.cache
 C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Release\Computer_Monitor.AboutBox1.resources
+C:\Users\qojmo2\Google Drive\DEV\VisualStudio\Computer Monitor\Computer Monitor\obj\Release\Computer_Monitor.Login.resources

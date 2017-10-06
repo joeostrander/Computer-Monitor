@@ -19,7 +19,7 @@ namespace Computer_Monitor
         /*
          * TO DO:
          * background worker to get existing processes
-         * 
+         * alternate credentials?
          * 
          */
 
@@ -38,6 +38,9 @@ namespace Computer_Monitor
         private int intProcessCount = 0;
         private bool boolClosing = false;
         private bool boolFailure = false;
+
+        public static string strUsername;
+        public static string strPassword;
 
         public struct MyProcess
         {
@@ -85,7 +88,7 @@ namespace Computer_Monitor
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Text = Application.ProductName;
-            labelStatus.Text = "";
+            toolStripStatusLabel1.Text = "";
 
             ListBoxLogFiles.Items.AddRange(logFiles);
             ListBoxLogFiles.SetSelected(0, true);
@@ -121,9 +124,9 @@ namespace Computer_Monitor
                 if (checkBoxProcesses.Checked && checkBoxExistingProcesses.Checked)
                 {
                     EnableControls(false);
-                    labelStatus.Text = "Gathering existing processes...";
+                    toolStripStatusLabel1.Text = "Gathering existing processes...";
                     List<MyProcess> procs = GetProcesses();
-                    labelStatus.Text = "";
+                    toolStripStatusLabel1.Text = "";
                     if (procs.Count == 0)
                     {
                         Console.WriteLine("NO PROCESSES IN LIST!");
@@ -147,7 +150,7 @@ namespace Computer_Monitor
                         lvi.SubItems.Add(proc.CommandLine);
                         lvi.SubItems.Add(proc.ExecutablePath);
 
-                        //ToolStripStatusLabel1.Text = "Processes:  " + intProcessCount;
+                        //toolStripStatusLabel1.Text = "Processes:  " + intProcessCount;
 
                         if (ListViewProcesses.InvokeRequired)
                         {
@@ -176,8 +179,11 @@ namespace Computer_Monitor
                 }
 
 
-                if (boolFailure)
+                if (boolFailure) {
+                    EnableControls(true);
                     return;
+                }
+                    
 
                 if (boolWatchingEvents||boolWatchingProcesses)
                 {
@@ -228,8 +234,14 @@ namespace Computer_Monitor
             {
                 colProcesses = GetCollection("select * from Win32_Process");
             }
+            catch (UnauthorizedAccessException uex)
+            {
+                MessageBox.Show("Access is denied.\n\n"+uex.Message, "Get Processes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return listProcs;
+            }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message, "Get Processes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return listProcs;
             }
 
@@ -362,72 +374,97 @@ namespace Computer_Monitor
 
         private bool StartWatchingProcesses()
         {
+            Console.WriteLine("StartWatchingProcesses...");
             watcher_process_created = new ManagementEventWatcher();
             watcher_process_deleted = new ManagementEventWatcher();
-            bool boolAddSecurity = false;
-            scope = GetScope(boolAddSecurity);
+            scope = GetScope();
             if (scope == null)
                 return false;
 
             bool boolSuccess = false;
 
-            if (checkBoxMonitorProcessAdditions.Checked)
+            try
             {
-                string strQueryCreated = "TargetInstance isa \"Win32_Process\"";
-                WqlEventQuery query_created = new WqlEventQuery("__InstanceCreationEvent", new TimeSpan(0, 0, 1), strQueryCreated);
-
-                watcher_process_created.Scope = scope;
-                watcher_process_created.Query = query_created;
-                watcher_process_created.Options.Timeout = new TimeSpan(1, 0, 0);
-
-                try
+                if (!scope.IsConnected)
                 {
-                    watcher_process_created.EventArrived += CreatedArrived;
-                    watcher_process_created.Start();
-                    boolSuccess = true;
+                    scope.Connect();
                 }
-                catch (UnauthorizedAccessException uex)
+            }
+            catch (UnauthorizedAccessException uex)
+            {
+                MessageBox.Show("Access is denied.", Application.ProductName + " Watch Processes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message, Application.ProductName + " Watch Processes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            if (scope.IsConnected) {
+
+                if (checkBoxMonitorProcessAdditions.Checked)
                 {
-                    MessageBox.Show("Access is denied.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    boolSuccess = false;
-                    boolFailure = true;
+                    string strQueryCreated = "TargetInstance isa \"Win32_Process\"";
+                    WqlEventQuery query_created = new WqlEventQuery("__InstanceCreationEvent", new TimeSpan(0, 0, 1), strQueryCreated);
+
+                    watcher_process_created.Scope = scope;
+                    watcher_process_created.Query = query_created;
+                    watcher_process_created.Options.Timeout = new TimeSpan(1, 0, 0);
+
+                    try
+                    {
+                        watcher_process_created.EventArrived += CreatedArrived;
+                        watcher_process_created.Start();
+                        boolSuccess = true;
+                    }
+                    catch (UnauthorizedAccessException uex)
+                    {
+                        Console.WriteLine("StartWatchingProcesses() - UnauthorizedAccessException - " + uex.Message);
+                        MessageBox.Show("Access is denied.", Application.ProductName + " - Start Watching Processes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        boolSuccess = false;
+                        boolFailure = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("StartWatchingProcesses() - Exception - " + ex.Message);
+                        MessageBox.Show(ex.Message, Application.ProductName + " - Start Watching Processes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        boolSuccess = false;
+                        boolFailure = true;
+                    }
                 }
-                catch (Exception ex)
+
+                if (checkBoxMonitorProcessDeletions.Checked)
                 {
-                    MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    boolSuccess = false;
-                    boolFailure = true;
+                    string strQueryDeleted = "TargetInstance isa \"Win32_Process\"";
+                    WqlEventQuery query_deleted = new WqlEventQuery("__InstanceDeletionEvent", new TimeSpan(0, 0, 1), strQueryDeleted);
+
+                    watcher_process_deleted.Scope = scope;
+                    watcher_process_deleted.Query = query_deleted;
+                    watcher_process_deleted.Options.Timeout = new TimeSpan(1, 0, 0);
+
+                    try
+                    {
+                        watcher_process_deleted.EventArrived += DeletedArrived;
+                        watcher_process_deleted.Start();
+                        boolSuccess = true;
+                    }
+                    catch (UnauthorizedAccessException uex)
+                    {
+                        Console.WriteLine("StartWatchingProcesses() - UnauthorizedAccessException - " + uex.Message);
+                        MessageBox.Show("Access is denied.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        boolSuccess = false;
+                        boolFailure = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("StartWatchingProcesses() - Exception - " + ex.Message);
+                        MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        boolSuccess = false;
+                        boolFailure = true;
+                    }
                 }
             }
 
-            if (checkBoxMonitorProcessDeletions.Checked)
-            {
-                string strQueryDeleted = "TargetInstance isa \"Win32_Process\"";
-                WqlEventQuery query_deleted = new WqlEventQuery("__InstanceDeletionEvent", new TimeSpan(0, 0, 1), strQueryDeleted);
-
-                watcher_process_deleted.Scope = scope;
-                watcher_process_deleted.Query = query_deleted;
-                watcher_process_deleted.Options.Timeout = new TimeSpan(1, 0, 0);
-
-                try
-                {
-                    watcher_process_deleted.EventArrived += DeletedArrived;
-                    watcher_process_deleted.Start();
-                    boolSuccess = true;
-                }
-                catch (UnauthorizedAccessException uex)
-                {
-                    MessageBox.Show("Access is denied.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    boolSuccess = false;
-                    boolFailure = true;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    boolSuccess = false;
-                    boolFailure = true;
-                }
-            }
 
 
             return boolSuccess;
@@ -627,28 +664,51 @@ namespace Computer_Monitor
         private ManagementObjectCollection GetCollection(string strQuery)
         {
             bool boolAddSecurity = false;
-            scope = GetScope(boolAddSecurity);
+            scope = GetScope();
             if (scope == null)
                 return null;
 
+
             try
             {
-                SelectQuery oQuery = new SelectQuery(string.Format(strQuery));
-                ManagementObjectSearcher oSearcher = new ManagementObjectSearcher(scope, oQuery);
-                ManagementObjectCollection colTemp = oSearcher.Get();
-
-                return colTemp;
-            }
-            catch (System.UnauthorizedAccessException unauth)
-            {
-                MessageBox.Show("Access is denied.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return null;
+                if (!scope.IsConnected)
+                {
+                    scope.Connect();
+                }
             }
             catch (Exception ex)
             {
-                //no msg
+                Console.WriteLine("GetCollection - scope connect "+ex.Message);
+            }
+
+            if (scope.IsConnected)
+            {
+                try
+                {
+                    SelectQuery oQuery = new SelectQuery(string.Format(strQuery));
+                    ManagementObjectSearcher oSearcher = new ManagementObjectSearcher(scope, oQuery);
+                    ManagementObjectCollection colTemp = oSearcher.Get();
+
+                    return colTemp;
+                }
+                catch (System.UnauthorizedAccessException unauth)
+                {
+                    Console.WriteLine("GetCollection - oSearcher.Get " + unauth.Message);
+                    MessageBox.Show("Access is denied.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    //no msg
+                    return null;
+                }
+            }
+            else
+            {
                 return null;
             }
+
+            
 
         }
 
@@ -742,7 +802,7 @@ namespace Computer_Monitor
 
         private bool StartWatchingEvents()
         {
-
+            Console.WriteLine("StartWatchingEvents...");
             if (ListBoxLogFiles.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Select at least 1 log file.",Application.ProductName,MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -795,37 +855,67 @@ namespace Computer_Monitor
                 strQuery += " AND (" + strCheckLogType + ")";
             }
 
-            scope = GetScope(boolAddSecurity);
+            scope = GetScope();
             if (scope == null)
                 return false;
 
-
-            Console.WriteLine(strQuery);
-            WqlEventQuery query_created = new WqlEventQuery("__InstanceCreationEvent", new TimeSpan(0, 0, 1), strQuery);
-
-            //Using watcher_created As New ManagementEventWatcher
-            watcher_events = new ManagementEventWatcher();
-
-            watcher_events.Scope = scope;
-            watcher_events.Query = query_created;
-            watcher_events.Options.Timeout = new TimeSpan(1, 0, 0);
+            Console.WriteLine("Got scope...");
 
             try
             {
-                watcher_events.EventArrived += EventArrived;
-                watcher_events.Start();
-                return true;
+                if (!scope.IsConnected)
+                {
+                    Console.WriteLine("Scope connect...");
+                    scope.Connect();
+                }
             }
             catch (UnauthorizedAccessException uex)
             {
-                MessageBox.Show("Access is denied.",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show("Access is denied.", Application.ProductName + " Watch Events", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 boolFailure = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Console.WriteLine("scope connect failed..."+ex.Message);
+                MessageBox.Show(ex.Message, Application.ProductName + " Watch Events", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 boolFailure = true;
             }
+
+            if (scope.IsConnected)
+            {
+                Console.WriteLine("Scope is connected...");
+                Console.WriteLine(strQuery);
+                WqlEventQuery query_created = new WqlEventQuery("__InstanceCreationEvent", new TimeSpan(0, 0, 1), strQuery);
+
+                //Using watcher_created As New ManagementEventWatcher
+                watcher_events = new ManagementEventWatcher();
+
+                watcher_events.Scope = scope;
+                watcher_events.Query = query_created;
+                watcher_events.Options.Timeout = new TimeSpan(1, 0, 0);
+
+                try
+                {
+                    Console.WriteLine("ONE");
+                    watcher_events.EventArrived += EventArrived;
+                    Console.WriteLine("TWO");
+                    watcher_events.Start();
+                    Console.WriteLine("THREE");
+                    return true;
+                }
+                catch (UnauthorizedAccessException uex)
+                {
+                    Console.WriteLine(uex.Message);
+                    MessageBox.Show("Access is denied.", Application.ProductName + " - Start Watching Events", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    boolFailure = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName + " - Start Watching Events", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    boolFailure = true;
+                }
+            }
+
 
             return false;
         }
@@ -877,7 +967,7 @@ namespace Computer_Monitor
 
         }
 
-        private ManagementScope GetScope(bool boolAddSecurity)
+        private ManagementScope GetScope()
         {
             string strComputer = TextBoxComputer.Text;
             if (string.IsNullOrEmpty(strComputer))
@@ -886,10 +976,14 @@ namespace Computer_Monitor
             }
 
             ConnectionOptions oConn = new ConnectionOptions();
-            if (boolAddSecurity)
+            if (CheckBoxAlternateCredentials.Checked && strComputer!="")
             {
-                oConn.EnablePrivileges = boolAddSecurity;
+                oConn.Username = strUsername;
+                oConn.Password = strPassword;
+                oConn.Impersonation = ImpersonationLevel.Impersonate;
             }
+            //oConn.EnablePrivileges = true;
+            //oConn.Timeout = new TimeSpan(0, 5, 0);
 
             ManagementScope oMs;
             try
@@ -900,7 +994,7 @@ namespace Computer_Monitor
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Source + "\r\n" + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("GetScope - \n\n"+ex.Source + "\r\n" + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return null;
             }
 
@@ -1024,7 +1118,10 @@ namespace Computer_Monitor
             foreach (ColumnHeader col in ListViewEvents.Columns)
             {
                 string eventHeading = col.Text;
-                string eventText = ListViewEvents.Items[intSelectedIndex].SubItems[col.Index].Text.Replace("\n", "\\par ");
+                string eventText = ListViewEvents.Items[intSelectedIndex].SubItems[col.Index].Text;
+                eventText = eventText.Replace("\\", "\\\\");
+                eventText = eventText.Replace("\n", "\\par ");
+
                 rtf += "\\cf1\\b " + eventHeading + ":\\b0\\cf0\\par \r\n";
                 rtf += eventText + "\\par \\par \r\n";
                 Console.WriteLine(rtf);
@@ -1141,7 +1238,22 @@ namespace Computer_Monitor
             about.ShowDialog();
         }
 
+        private void CheckBoxAlternateCredentials_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CheckBoxAlternateCredentials.Checked) {
+                ButtonSetCredentials.Visible = true;
+            } else {
+                ButtonSetCredentials.Visible = false;
+            }
+        }
 
+        private void ButtonSetCredentials_Click(object sender, EventArgs e)
+        {
+            Login frmLogin = new Login();
+            frmLogin.ShowDialog();
+
+
+        }
     }
 
 

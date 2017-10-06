@@ -66,9 +66,12 @@
             this.panelEventOptions = new System.Windows.Forms.Panel();
             this.groupBoxOptions = new System.Windows.Forms.GroupBox();
             this.groupBoxComputer = new System.Windows.Forms.GroupBox();
-            this.labelStatus = new System.Windows.Forms.Label();
             this.contextMenuStripForm1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.CheckBoxAlternateCredentials = new System.Windows.Forms.CheckBox();
+            this.ButtonSetCredentials = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -82,6 +85,7 @@
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxComputer.SuspendLayout();
             this.contextMenuStripForm1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBoxProcesses
@@ -127,8 +131,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBoxEvents);
-            this.splitContainer1.Size = new System.Drawing.Size(838, 411);
-            this.splitContainer1.SplitterDistance = 202;
+            this.splitContainer1.Size = new System.Drawing.Size(838, 399);
+            this.splitContainer1.SplitterDistance = 192;
             this.splitContainer1.TabIndex = 2;
             this.splitContainer1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Paint);
             // 
@@ -142,7 +146,7 @@
             this.groupBoxProcesses.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.groupBoxProcesses.Name = "groupBoxProcesses";
             this.groupBoxProcesses.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.groupBoxProcesses.Size = new System.Drawing.Size(832, 196);
+            this.groupBoxProcesses.Size = new System.Drawing.Size(832, 186);
             this.groupBoxProcesses.TabIndex = 0;
             this.groupBoxProcesses.TabStop = false;
             this.groupBoxProcesses.Text = "Process History";
@@ -164,7 +168,7 @@
             this.ListViewProcesses.Location = new System.Drawing.Point(0, 16);
             this.ListViewProcesses.MultiSelect = false;
             this.ListViewProcesses.Name = "ListViewProcesses";
-            this.ListViewProcesses.Size = new System.Drawing.Size(832, 177);
+            this.ListViewProcesses.Size = new System.Drawing.Size(832, 167);
             this.ListViewProcesses.TabIndex = 0;
             this.ListViewProcesses.UseCompatibleStateImageBehavior = false;
             this.ListViewProcesses.View = System.Windows.Forms.View.Details;
@@ -235,7 +239,7 @@
             this.groupBoxEvents.Controls.Add(this.ListViewEvents);
             this.groupBoxEvents.Location = new System.Drawing.Point(3, 3);
             this.groupBoxEvents.Name = "groupBoxEvents";
-            this.groupBoxEvents.Size = new System.Drawing.Size(832, 199);
+            this.groupBoxEvents.Size = new System.Drawing.Size(832, 197);
             this.groupBoxEvents.TabIndex = 0;
             this.groupBoxEvents.TabStop = false;
             this.groupBoxEvents.Text = "Events";
@@ -256,7 +260,7 @@
             this.ListViewEvents.Location = new System.Drawing.Point(3, 16);
             this.ListViewEvents.MultiSelect = false;
             this.ListViewEvents.Name = "ListViewEvents";
-            this.ListViewEvents.Size = new System.Drawing.Size(826, 180);
+            this.ListViewEvents.Size = new System.Drawing.Size(826, 178);
             this.ListViewEvents.TabIndex = 0;
             this.ListViewEvents.UseCompatibleStateImageBehavior = false;
             this.ListViewEvents.View = System.Windows.Forms.View.Details;
@@ -445,7 +449,8 @@
             this.groupBoxComputer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxComputer.ContextMenuStrip = this.contextMenuStripForm1;
-            this.groupBoxComputer.Controls.Add(this.labelStatus);
+            this.groupBoxComputer.Controls.Add(this.ButtonSetCredentials);
+            this.groupBoxComputer.Controls.Add(this.CheckBoxAlternateCredentials);
             this.groupBoxComputer.Controls.Add(this.TextBoxComputer);
             this.groupBoxComputer.Controls.Add(this.ButtonStart);
             this.groupBoxComputer.Location = new System.Drawing.Point(12, 115);
@@ -454,15 +459,6 @@
             this.groupBoxComputer.TabIndex = 1;
             this.groupBoxComputer.TabStop = false;
             this.groupBoxComputer.Text = "&Computer";
-            // 
-            // labelStatus
-            // 
-            this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(331, 22);
-            this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(68, 13);
-            this.labelStatus.TabIndex = 2;
-            this.labelStatus.Text = "labelStatus...";
             // 
             // contextMenuStripForm1
             // 
@@ -479,14 +475,60 @@
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 574);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(856, 22);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            // 
+            // CheckBoxAlternateCredentials
+            // 
+            this.CheckBoxAlternateCredentials.AutoSize = true;
+            this.CheckBoxAlternateCredentials.Location = new System.Drawing.Point(325, 21);
+            this.CheckBoxAlternateCredentials.Name = "CheckBoxAlternateCredentials";
+            this.CheckBoxAlternateCredentials.Size = new System.Drawing.Size(145, 17);
+            this.CheckBoxAlternateCredentials.TabIndex = 9;
+            this.CheckBoxAlternateCredentials.Text = "Use &Alternate Credentials";
+            this.CheckBoxAlternateCredentials.UseVisualStyleBackColor = true;
+            this.CheckBoxAlternateCredentials.CheckedChanged += new System.EventHandler(this.CheckBoxAlternateCredentials_CheckedChanged);
+            // 
+            // ButtonSetCredentials
+            // 
+            this.ButtonSetCredentials.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.ButtonSetCredentials.FlatAppearance.BorderSize = 0;
+            this.ButtonSetCredentials.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.ButtonSetCredentials.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.ButtonSetCredentials.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonSetCredentials.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.ButtonSetCredentials.Location = new System.Drawing.Point(485, 17);
+            this.ButtonSetCredentials.Name = "ButtonSetCredentials";
+            this.ButtonSetCredentials.Size = new System.Drawing.Size(102, 23);
+            this.ButtonSetCredentials.TabIndex = 10;
+            this.ButtonSetCredentials.Text = "Set C&redentials";
+            this.ButtonSetCredentials.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ButtonSetCredentials.UseVisualStyleBackColor = true;
+            this.ButtonSetCredentials.Visible = false;
+            this.ButtonSetCredentials.Click += new System.EventHandler(this.ButtonSetCredentials_Click);
+            // 
             // Form1
             // 
             this.AcceptButton = this.ButtonStart;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.ButtonStart;
-            this.ClientSize = new System.Drawing.Size(856, 595);
+            this.ClientSize = new System.Drawing.Size(856, 596);
             this.ContextMenuStrip = this.contextMenuStripEvents;
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBoxComputer);
             this.Controls.Add(this.groupBoxOptions);
             this.Controls.Add(this.splitContainer1);
@@ -514,7 +556,10 @@
             this.groupBoxComputer.ResumeLayout(false);
             this.groupBoxComputer.PerformLayout();
             this.contextMenuStripForm1.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -552,13 +597,16 @@
         internal System.Windows.Forms.ColumnHeader ColumnHeaderCommandLine;
         internal System.Windows.Forms.ColumnHeader ColumnHeaderExecutablePath;
         internal System.Windows.Forms.ColumnHeader ColumnHeaderTerminationDate;
-        private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripEvents;
         private System.Windows.Forms.ToolStripMenuItem viewMessageToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripProcesses;
         private System.Windows.Forms.ToolStripMenuItem terminateToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripForm1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        internal System.Windows.Forms.Button ButtonSetCredentials;
+        internal System.Windows.Forms.CheckBox CheckBoxAlternateCredentials;
     }
 }
 
