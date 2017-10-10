@@ -19,7 +19,7 @@ namespace Computer_Monitor
         /*
          * TO DO:
          * background worker to get existing processes
-         * alternate credentials?
+         * Export lists
          * 
          */
 
@@ -1137,8 +1137,10 @@ namespace Computer_Monitor
             int intSelectedIndex = ListViewProcesses.SelectedIndices[0];
             int colIndexPID = GetColumnIndex(ListViewProcesses, "PID");
             int colIndexName = GetColumnIndex(ListViewProcesses, "Name");
+
             string PID = ListViewProcesses.Items[intSelectedIndex].SubItems[colIndexPID].Text;
             string procName = ListViewProcesses.Items[intSelectedIndex].SubItems[colIndexName].Text;
+
             DialogResult result = MessageBox.Show("Terminate process:  " + procName + " [" + PID + "]", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result==DialogResult.Yes)
             {
@@ -1205,25 +1207,42 @@ namespace Computer_Monitor
 
         private void contextMenuStripProcesses_Opening(object sender, CancelEventArgs e)
         {
+            terminateToolStripMenuItem.Visible = true;
+
             if (ListViewProcesses.SelectedIndices.Count == 0)
             {
                 e.Cancel = true;
             }
             else
             {
+
                 int intSelectedIndex = ListViewProcesses.SelectedIndices[0];
                 int colIndexPID = GetColumnIndex(ListViewProcesses, "PID");
                 int colIndexName = GetColumnIndex(ListViewProcesses, "Name");
+                int colIndexTerminated = GetColumnIndex(ListViewProcesses, "Terminated");
                 string PID = ListViewProcesses.Items[intSelectedIndex].SubItems[colIndexPID].Text;
                 string procName = ListViewProcesses.Items[intSelectedIndex].SubItems[colIndexName].Text;
-                if (string.IsNullOrEmpty(procName) && string.IsNullOrEmpty(PID))
+                string terminated = ListViewProcesses.Items[intSelectedIndex].SubItems[colIndexTerminated].Text;
+
+                //if the process is terminated... cancel
+                if (!string.IsNullOrEmpty(terminated))
                 {
-                    e.Cancel = true;
+                    //e.Cancel = true;
+                    terminateToolStripMenuItem.Visible = false;
                 }
                 else
                 {
-                    terminateToolStripMenuItem.Text = "&Terminate process:  " + procName + " [" + PID + "]";
+                    if (string.IsNullOrEmpty(procName) || string.IsNullOrEmpty(PID) || PID=="0" || procName=="System")
+                    {
+                        //e.Cancel = true;
+                        terminateToolStripMenuItem.Visible = false;
+                    }
+                    else
+                    {
+                        terminateToolStripMenuItem.Text = "&Terminate process:  " + procName + " [" + PID + "]";
+                    }
                 }
+                
             }
         }
 
@@ -1253,6 +1272,16 @@ namespace Computer_Monitor
             frmLogin.ShowDialog();
 
 
+        }
+
+        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CSV_Export.ExportToCSV(ListViewProcesses);
+        }
+
+        private void exportToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            CSV_Export.ExportToCSV(ListViewEvents);
         }
     }
 

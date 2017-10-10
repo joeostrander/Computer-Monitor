@@ -72,6 +72,8 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.CheckBoxAlternateCredentials = new System.Windows.Forms.CheckBox();
             this.ButtonSetCredentials = new System.Windows.Forms.Button();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -218,10 +220,11 @@
             // contextMenuStripProcesses
             // 
             this.contextMenuStripProcesses.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.terminateToolStripMenuItem});
+            this.terminateToolStripMenuItem,
+            this.exportToolStripMenuItem});
             this.contextMenuStripProcesses.Name = "contextMenuStripProcesses";
             this.contextMenuStripProcesses.ShowImageMargin = false;
-            this.contextMenuStripProcesses.Size = new System.Drawing.Size(103, 26);
+            this.contextMenuStripProcesses.Size = new System.Drawing.Size(103, 48);
             this.contextMenuStripProcesses.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripProcesses_Opening);
             // 
             // terminateToolStripMenuItem
@@ -306,10 +309,11 @@
             // contextMenuStripEvents
             // 
             this.contextMenuStripEvents.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewMessageToolStripMenuItem});
+            this.viewMessageToolStripMenuItem,
+            this.exportToolStripMenuItem1});
             this.contextMenuStripEvents.Name = "contextMenuStripEvents";
             this.contextMenuStripEvents.ShowImageMargin = false;
-            this.contextMenuStripEvents.Size = new System.Drawing.Size(124, 26);
+            this.contextMenuStripEvents.Size = new System.Drawing.Size(128, 70);
             this.contextMenuStripEvents.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripEvents_Opening);
             // 
             // viewMessageToolStripMenuItem
@@ -520,6 +524,20 @@
             this.ButtonSetCredentials.Visible = false;
             this.ButtonSetCredentials.Click += new System.EventHandler(this.ButtonSetCredentials_Click);
             // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.exportToolStripMenuItem.Text = "&Export";
+            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            // 
+            // exportToolStripMenuItem1
+            // 
+            this.exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
+            this.exportToolStripMenuItem1.Size = new System.Drawing.Size(127, 22);
+            this.exportToolStripMenuItem1.Text = "&Export";
+            this.exportToolStripMenuItem1.Click += new System.EventHandler(this.exportToolStripMenuItem1_Click);
+            // 
             // Form1
             // 
             this.AcceptButton = this.ButtonStart;
@@ -607,6 +625,8 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         internal System.Windows.Forms.Button ButtonSetCredentials;
         internal System.Windows.Forms.CheckBox CheckBoxAlternateCredentials;
+        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem1;
     }
 }
 
