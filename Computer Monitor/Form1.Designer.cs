@@ -74,6 +74,8 @@
             this.ButtonSetCredentials = new System.Windows.Forms.Button();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyRowToolStripMenuItemProcesses = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyRowToolStripMenuItemEvents = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -221,16 +223,17 @@
             // 
             this.contextMenuStripProcesses.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.terminateToolStripMenuItem,
-            this.exportToolStripMenuItem});
+            this.exportToolStripMenuItem,
+            this.copyRowToolStripMenuItemProcesses});
             this.contextMenuStripProcesses.Name = "contextMenuStripProcesses";
             this.contextMenuStripProcesses.ShowImageMargin = false;
-            this.contextMenuStripProcesses.Size = new System.Drawing.Size(103, 48);
+            this.contextMenuStripProcesses.Size = new System.Drawing.Size(128, 92);
             this.contextMenuStripProcesses.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripProcesses_Opening);
             // 
             // terminateToolStripMenuItem
             // 
             this.terminateToolStripMenuItem.Name = "terminateToolStripMenuItem";
-            this.terminateToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.terminateToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.terminateToolStripMenuItem.Text = "&Terminate";
             this.terminateToolStripMenuItem.Click += new System.EventHandler(this.terminateToolStripMenuItem_Click);
             // 
@@ -310,10 +313,11 @@
             // 
             this.contextMenuStripEvents.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewMessageToolStripMenuItem,
-            this.exportToolStripMenuItem1});
+            this.exportToolStripMenuItem1,
+            this.copyRowToolStripMenuItemEvents});
             this.contextMenuStripEvents.Name = "contextMenuStripEvents";
             this.contextMenuStripEvents.ShowImageMargin = false;
-            this.contextMenuStripEvents.Size = new System.Drawing.Size(128, 70);
+            this.contextMenuStripEvents.Size = new System.Drawing.Size(124, 70);
             this.contextMenuStripEvents.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripEvents_Opening);
             // 
             // viewMessageToolStripMenuItem
@@ -534,9 +538,23 @@
             // exportToolStripMenuItem1
             // 
             this.exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
-            this.exportToolStripMenuItem1.Size = new System.Drawing.Size(127, 22);
+            this.exportToolStripMenuItem1.Size = new System.Drawing.Size(123, 22);
             this.exportToolStripMenuItem1.Text = "&Export";
             this.exportToolStripMenuItem1.Click += new System.EventHandler(this.exportToolStripMenuItem1_Click);
+            // 
+            // copyRowToolStripMenuItemProcesses
+            // 
+            this.copyRowToolStripMenuItemProcesses.Name = "copyRowToolStripMenuItemProcesses";
+            this.copyRowToolStripMenuItemProcesses.Size = new System.Drawing.Size(127, 22);
+            this.copyRowToolStripMenuItemProcesses.Text = "&Copy Row";
+            this.copyRowToolStripMenuItemProcesses.Click += new System.EventHandler(this.copyRowToolStripMenuItemProcesses_Click);
+            // 
+            // copyRowToolStripMenuItemEvents
+            // 
+            this.copyRowToolStripMenuItemEvents.Name = "copyRowToolStripMenuItemEvents";
+            this.copyRowToolStripMenuItemEvents.Size = new System.Drawing.Size(123, 22);
+            this.copyRowToolStripMenuItemEvents.Text = "&Copy Row";
+            this.copyRowToolStripMenuItemEvents.Click += new System.EventHandler(this.copyRowToolStripMenuItemEvents_Click);
             // 
             // Form1
             // 
@@ -627,6 +645,8 @@
         internal System.Windows.Forms.CheckBox CheckBoxAlternateCredentials;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem copyRowToolStripMenuItemProcesses;
+        private System.Windows.Forms.ToolStripMenuItem copyRowToolStripMenuItemEvents;
     }
 }
 

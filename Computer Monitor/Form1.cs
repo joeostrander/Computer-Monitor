@@ -1283,6 +1283,33 @@ namespace Computer_Monitor
         {
             CSV_Export.ExportToCSV(ListViewEvents);
         }
+
+        private void copyRowToolStripMenuItemEvents_Click(object sender, EventArgs e)
+        {
+            copyRow(ListViewEvents);
+        }
+
+        private void copyRowToolStripMenuItemProcesses_Click(object sender, EventArgs e)
+        {
+            copyRow(ListViewProcesses);
+        }
+
+        private void copyRow(ListView view)
+        {
+            int intSelectedIndex = view.SelectedIndices[0];
+            ListViewItem lvi = view.Items[intSelectedIndex];
+
+            string copyText = "";
+            int idx = 0;
+            foreach (ListViewItem.ListViewSubItem subItem in lvi.SubItems)
+            {
+                
+                copyText += view.Columns[idx].Text + ":\r\n";
+                copyText += subItem.Text + "\r\n\r\n";
+                idx += 1;
+            }
+            Clipboard.SetText(copyText);
+        }
     }
 
 
