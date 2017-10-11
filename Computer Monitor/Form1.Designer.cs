@@ -43,6 +43,8 @@
             this.ColumnHeaderExecutablePath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStripProcesses = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.terminateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyRowToolStripMenuItemProcesses = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxEvents = new System.Windows.Forms.GroupBox();
             this.ListViewEvents = new System.Windows.Forms.ListView();
             this.ColumnHeaderCreationDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -53,6 +55,8 @@
             this.ColumnHeaderMessage = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStripEvents = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyRowToolStripMenuItemEvents = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBoxMonitorProcessAdditions = new System.Windows.Forms.CheckBox();
             this.checkBoxMonitorProcessDeletions = new System.Windows.Forms.CheckBox();
             this.Label3 = new System.Windows.Forms.Label();
@@ -65,17 +69,14 @@
             this.checkBoxExistingProcesses = new System.Windows.Forms.CheckBox();
             this.panelEventOptions = new System.Windows.Forms.Panel();
             this.groupBoxOptions = new System.Windows.Forms.GroupBox();
-            this.groupBoxComputer = new System.Windows.Forms.GroupBox();
             this.contextMenuStripForm1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBoxComputer = new System.Windows.Forms.GroupBox();
+            this.ButtonSetCredentials = new System.Windows.Forms.Button();
+            this.CheckBoxAlternateCredentials = new System.Windows.Forms.CheckBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.CheckBoxAlternateCredentials = new System.Windows.Forms.CheckBox();
-            this.ButtonSetCredentials = new System.Windows.Forms.Button();
-            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyRowToolStripMenuItemProcesses = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyRowToolStripMenuItemEvents = new System.Windows.Forms.ToolStripMenuItem();
+            this.showInExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -87,8 +88,8 @@
             this.panelProcessOptions.SuspendLayout();
             this.panelEventOptions.SuspendLayout();
             this.groupBoxOptions.SuspendLayout();
-            this.groupBoxComputer.SuspendLayout();
             this.contextMenuStripForm1.SuspendLayout();
+            this.groupBoxComputer.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -224,18 +225,33 @@
             this.contextMenuStripProcesses.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.terminateToolStripMenuItem,
             this.exportToolStripMenuItem,
-            this.copyRowToolStripMenuItemProcesses});
+            this.copyRowToolStripMenuItemProcesses,
+            this.showInExplorerToolStripMenuItem});
             this.contextMenuStripProcesses.Name = "contextMenuStripProcesses";
             this.contextMenuStripProcesses.ShowImageMargin = false;
-            this.contextMenuStripProcesses.Size = new System.Drawing.Size(128, 92);
+            this.contextMenuStripProcesses.Size = new System.Drawing.Size(137, 114);
             this.contextMenuStripProcesses.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripProcesses_Opening);
             // 
             // terminateToolStripMenuItem
             // 
             this.terminateToolStripMenuItem.Name = "terminateToolStripMenuItem";
-            this.terminateToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.terminateToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.terminateToolStripMenuItem.Text = "&Terminate";
             this.terminateToolStripMenuItem.Click += new System.EventHandler(this.terminateToolStripMenuItem_Click);
+            // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.exportToolStripMenuItem.Text = "&Export";
+            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            // 
+            // copyRowToolStripMenuItemProcesses
+            // 
+            this.copyRowToolStripMenuItemProcesses.Name = "copyRowToolStripMenuItemProcesses";
+            this.copyRowToolStripMenuItemProcesses.Size = new System.Drawing.Size(136, 22);
+            this.copyRowToolStripMenuItemProcesses.Text = "&Copy Row";
+            this.copyRowToolStripMenuItemProcesses.Click += new System.EventHandler(this.copyRowToolStripMenuItemProcesses_Click);
             // 
             // groupBoxEvents
             // 
@@ -326,6 +342,20 @@
             this.viewMessageToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.viewMessageToolStripMenuItem.Text = "&View Message";
             this.viewMessageToolStripMenuItem.Click += new System.EventHandler(this.viewMessageToolStripMenuItem_Click);
+            // 
+            // exportToolStripMenuItem1
+            // 
+            this.exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
+            this.exportToolStripMenuItem1.Size = new System.Drawing.Size(123, 22);
+            this.exportToolStripMenuItem1.Text = "&Export";
+            this.exportToolStripMenuItem1.Click += new System.EventHandler(this.exportToolStripMenuItem1_Click);
+            // 
+            // copyRowToolStripMenuItemEvents
+            // 
+            this.copyRowToolStripMenuItemEvents.Name = "copyRowToolStripMenuItemEvents";
+            this.copyRowToolStripMenuItemEvents.Size = new System.Drawing.Size(123, 22);
+            this.copyRowToolStripMenuItemEvents.Text = "&Copy Row";
+            this.copyRowToolStripMenuItemEvents.Click += new System.EventHandler(this.copyRowToolStripMenuItemEvents_Click);
             // 
             // checkBoxMonitorProcessAdditions
             // 
@@ -452,22 +482,6 @@
             this.groupBoxOptions.TabStop = false;
             this.groupBoxOptions.Text = "&Options";
             // 
-            // groupBoxComputer
-            // 
-            this.groupBoxComputer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxComputer.ContextMenuStrip = this.contextMenuStripForm1;
-            this.groupBoxComputer.Controls.Add(this.ButtonSetCredentials);
-            this.groupBoxComputer.Controls.Add(this.CheckBoxAlternateCredentials);
-            this.groupBoxComputer.Controls.Add(this.TextBoxComputer);
-            this.groupBoxComputer.Controls.Add(this.ButtonStart);
-            this.groupBoxComputer.Location = new System.Drawing.Point(12, 115);
-            this.groupBoxComputer.Name = "groupBoxComputer";
-            this.groupBoxComputer.Size = new System.Drawing.Size(832, 51);
-            this.groupBoxComputer.TabIndex = 1;
-            this.groupBoxComputer.TabStop = false;
-            this.groupBoxComputer.Text = "&Computer";
-            // 
             // contextMenuStripForm1
             // 
             this.contextMenuStripForm1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -483,32 +497,21 @@
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // statusStrip1
+            // groupBoxComputer
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 574);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(856, 22);
-            this.statusStrip1.TabIndex = 3;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-            // 
-            // CheckBoxAlternateCredentials
-            // 
-            this.CheckBoxAlternateCredentials.AutoSize = true;
-            this.CheckBoxAlternateCredentials.Location = new System.Drawing.Point(325, 21);
-            this.CheckBoxAlternateCredentials.Name = "CheckBoxAlternateCredentials";
-            this.CheckBoxAlternateCredentials.Size = new System.Drawing.Size(145, 17);
-            this.CheckBoxAlternateCredentials.TabIndex = 9;
-            this.CheckBoxAlternateCredentials.Text = "Use &Alternate Credentials";
-            this.CheckBoxAlternateCredentials.UseVisualStyleBackColor = true;
-            this.CheckBoxAlternateCredentials.CheckedChanged += new System.EventHandler(this.CheckBoxAlternateCredentials_CheckedChanged);
+            this.groupBoxComputer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxComputer.ContextMenuStrip = this.contextMenuStripForm1;
+            this.groupBoxComputer.Controls.Add(this.ButtonSetCredentials);
+            this.groupBoxComputer.Controls.Add(this.CheckBoxAlternateCredentials);
+            this.groupBoxComputer.Controls.Add(this.TextBoxComputer);
+            this.groupBoxComputer.Controls.Add(this.ButtonStart);
+            this.groupBoxComputer.Location = new System.Drawing.Point(12, 115);
+            this.groupBoxComputer.Name = "groupBoxComputer";
+            this.groupBoxComputer.Size = new System.Drawing.Size(832, 51);
+            this.groupBoxComputer.TabIndex = 1;
+            this.groupBoxComputer.TabStop = false;
+            this.groupBoxComputer.Text = "&Computer";
             // 
             // ButtonSetCredentials
             // 
@@ -528,33 +531,39 @@
             this.ButtonSetCredentials.Visible = false;
             this.ButtonSetCredentials.Click += new System.EventHandler(this.ButtonSetCredentials_Click);
             // 
-            // exportToolStripMenuItem
+            // CheckBoxAlternateCredentials
             // 
-            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
-            this.exportToolStripMenuItem.Text = "&Export";
-            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            this.CheckBoxAlternateCredentials.AutoSize = true;
+            this.CheckBoxAlternateCredentials.Location = new System.Drawing.Point(325, 21);
+            this.CheckBoxAlternateCredentials.Name = "CheckBoxAlternateCredentials";
+            this.CheckBoxAlternateCredentials.Size = new System.Drawing.Size(145, 17);
+            this.CheckBoxAlternateCredentials.TabIndex = 9;
+            this.CheckBoxAlternateCredentials.Text = "Use &Alternate Credentials";
+            this.CheckBoxAlternateCredentials.UseVisualStyleBackColor = true;
+            this.CheckBoxAlternateCredentials.CheckedChanged += new System.EventHandler(this.CheckBoxAlternateCredentials_CheckedChanged);
             // 
-            // exportToolStripMenuItem1
+            // statusStrip1
             // 
-            this.exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
-            this.exportToolStripMenuItem1.Size = new System.Drawing.Size(123, 22);
-            this.exportToolStripMenuItem1.Text = "&Export";
-            this.exportToolStripMenuItem1.Click += new System.EventHandler(this.exportToolStripMenuItem1_Click);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 574);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(856, 22);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // copyRowToolStripMenuItemProcesses
+            // toolStripStatusLabel1
             // 
-            this.copyRowToolStripMenuItemProcesses.Name = "copyRowToolStripMenuItemProcesses";
-            this.copyRowToolStripMenuItemProcesses.Size = new System.Drawing.Size(127, 22);
-            this.copyRowToolStripMenuItemProcesses.Text = "&Copy Row";
-            this.copyRowToolStripMenuItemProcesses.Click += new System.EventHandler(this.copyRowToolStripMenuItemProcesses_Click);
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
-            // copyRowToolStripMenuItemEvents
+            // showInExplorerToolStripMenuItem
             // 
-            this.copyRowToolStripMenuItemEvents.Name = "copyRowToolStripMenuItemEvents";
-            this.copyRowToolStripMenuItemEvents.Size = new System.Drawing.Size(123, 22);
-            this.copyRowToolStripMenuItemEvents.Text = "&Copy Row";
-            this.copyRowToolStripMenuItemEvents.Click += new System.EventHandler(this.copyRowToolStripMenuItemEvents_Click);
+            this.showInExplorerToolStripMenuItem.Name = "showInExplorerToolStripMenuItem";
+            this.showInExplorerToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.showInExplorerToolStripMenuItem.Text = "&Show in Explorer";
+            this.showInExplorerToolStripMenuItem.Click += new System.EventHandler(this.showInExplorerToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -589,9 +598,9 @@
             this.panelEventOptions.PerformLayout();
             this.groupBoxOptions.ResumeLayout(false);
             this.groupBoxOptions.PerformLayout();
+            this.contextMenuStripForm1.ResumeLayout(false);
             this.groupBoxComputer.ResumeLayout(false);
             this.groupBoxComputer.PerformLayout();
-            this.contextMenuStripForm1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -647,6 +656,7 @@
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem copyRowToolStripMenuItemProcesses;
         private System.Windows.Forms.ToolStripMenuItem copyRowToolStripMenuItemEvents;
+        private System.Windows.Forms.ToolStripMenuItem showInExplorerToolStripMenuItem;
     }
 }
 

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Management;
 using ListViewSorter;
+using System.Diagnostics;
 
 namespace Computer_Monitor
 {
@@ -1208,6 +1209,7 @@ namespace Computer_Monitor
         private void contextMenuStripProcesses_Opening(object sender, CancelEventArgs e)
         {
             terminateToolStripMenuItem.Visible = true;
+            showInExplorerToolStripMenuItem.Visible = true;
 
             if (ListViewProcesses.SelectedIndices.Count == 0)
             {
@@ -1220,9 +1222,11 @@ namespace Computer_Monitor
                 int colIndexPID = GetColumnIndex(ListViewProcesses, "PID");
                 int colIndexName = GetColumnIndex(ListViewProcesses, "Name");
                 int colIndexTerminated = GetColumnIndex(ListViewProcesses, "Terminated");
+                int colIndexExecutablePath = GetColumnIndex(ListViewProcesses, "Executable Path");
                 string PID = ListViewProcesses.Items[intSelectedIndex].SubItems[colIndexPID].Text;
                 string procName = ListViewProcesses.Items[intSelectedIndex].SubItems[colIndexName].Text;
                 string terminated = ListViewProcesses.Items[intSelectedIndex].SubItems[colIndexTerminated].Text;
+                string executablePath = ListViewProcesses.Items[intSelectedIndex].SubItems[colIndexExecutablePath].Text;
 
                 //if the process is terminated... cancel
                 if (!string.IsNullOrEmpty(terminated))
@@ -1242,7 +1246,13 @@ namespace Computer_Monitor
                         terminateToolStripMenuItem.Text = "&Terminate process:  " + procName + " [" + PID + "]";
                     }
                 }
-                
+
+                if (string.IsNullOrEmpty(executablePath))
+                {
+                    showInExplorerToolStripMenuItem.Visible = false;
+                }
+
+
             }
         }
 
@@ -1309,6 +1319,24 @@ namespace Computer_Monitor
                 idx += 1;
             }
             Clipboard.SetText(copyText);
+        }
+
+        private void showInExplorerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int intSelectedIndex = ListViewProcesses.SelectedIndices[0];
+            ListViewItem lvi = ListViewProcesses.Items[intSelectedIndex];
+
+            int colIndexExecutablePath = GetColumnIndex(ListViewProcesses, "Executable Path");
+            string executablePath = ListViewProcesses.Items[intSelectedIndex].SubItems[colIndexExecutablePath].Text;
+
+            if (string.IsNullOrEmpty(executablePath))
+                return;
+
+            Process proc = new Process();
+            proc.StartInfo = new ProcessStartInfo("explorer.exe", "/e,/select,\"" + executablePath + "\"");
+            proc.Start();
+
+
         }
     }
 
