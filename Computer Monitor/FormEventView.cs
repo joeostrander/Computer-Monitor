@@ -32,5 +32,11 @@ namespace Computer_Monitor
             richTextBox1.BackColor = Color.White;
             this.Text = Application.ProductName + " - Event Details";
         }
+
+        private void FormEventView_ResizeEnd(object sender, EventArgs e)
+        {
+            button1.Left = (this.ClientSize.Width - button1.Width) / 2;
+            //button1.Top = (this.ClientSize.Height - button1.Height) / 2;
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace Computer_Monitor
         /*
          * TO DO:
          * background worker to get existing processes
-         * Export lists
+         * Event icons?
          * 
          */
 
