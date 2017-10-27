@@ -209,7 +209,8 @@ namespace Computer_Monitor
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    //MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    //Do nothing...
                 }
 
                 boolWatchingEvents = false;
