@@ -54,6 +54,15 @@ namespace Computer_Monitor
             public string TerminationDate;
         }
 
+        public struct eventData
+        {
+            public string Created;
+            public string Computer;
+            public string EventID;
+            public string Type;
+            public string Source;
+            public string Message;
+        }
 
         public delegate void AddListViewItemCallback(ListView lv,ListViewItem lvi);
         public delegate void DeleteListViewItemCallback(ListView lv, int columnIndex, string value);
@@ -1114,25 +1123,30 @@ namespace Computer_Monitor
         private void viewEvent()
         {
             int intSelectedIndex = ListViewEvents.SelectedIndices[0];
-            string rtf = @"{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}\r\n";
-            rtf += @"{\colortbl ;\red0\green77\blue187;\red255\green0\blue0;}";
 
-            foreach (ColumnHeader col in ListViewEvents.Columns)
+            List<eventData> tmpList = new List<eventData>();
+            foreach (ListViewItem lvi in ListViewEvents.Items)
             {
-                string eventHeading = col.Text;
-                string eventText = ListViewEvents.Items[intSelectedIndex].SubItems[col.Index].Text;
-                eventText = eventText.Replace("\\", "\\\\");
-                eventText = eventText.Replace("\n", "\\par ");
-
-                rtf += "\\cf1\\b " + eventHeading + ":\\b0\\cf0\\par \r\n";
-                rtf += eventText + "\\par \\par \r\n";
-                Console.WriteLine(rtf);
+                eventData evt = new eventData();
+                               
+                evt.Created = lvi.SubItems[GetColumnIndex(ListViewEvents, "Created")].Text;
+                evt.Computer = lvi.SubItems[GetColumnIndex(ListViewEvents, "Computer")].Text;
+                evt.EventID = lvi.SubItems[GetColumnIndex(ListViewEvents, "Event ID")].Text;
+                evt.Type = lvi.SubItems[GetColumnIndex(ListViewEvents, "Type")].Text;
+                evt.Source = lvi.SubItems[GetColumnIndex(ListViewEvents, "Source")].Text;
+                evt.Message = lvi.SubItems[GetColumnIndex(ListViewEvents, "Message")].Text;
+                tmpList.Add(evt);
             }
 
             FormEventView frmEvt = new FormEventView();
-            frmEvt.rtf = rtf;
+            frmEvt.currentIndex = intSelectedIndex;
+            frmEvt.ListOfEvents = tmpList;
             frmEvt.ShowDialog();
+                       
+
         }
+
+        
 
         private void terminateToolStripMenuItem_Click(object sender, EventArgs e)
         {
