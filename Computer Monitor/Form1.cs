@@ -1347,6 +1347,12 @@ namespace Computer_Monitor
             if (string.IsNullOrEmpty(executablePath))
                 return;
 
+            string strComputer = TextBoxComputer.Text;
+            if (!string.IsNullOrEmpty(strComputer))
+            {
+                executablePath = @"\\" + strComputer + @"\" + executablePath.Replace(':', '$');
+            }
+
             Process proc = new Process();
             proc.StartInfo = new ProcessStartInfo("explorer.exe", "/e,/select,\"" + executablePath + "\"");
             proc.Start();
